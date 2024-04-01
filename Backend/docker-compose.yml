@@ -1,0 +1,48 @@
+version: '3.8'
+services:
+    db:
+        container_name: db
+        image: mysql
+        env_file:
+            - .env.production
+        restart: always
+        environment:
+            - MYSQL_ROOT_PASSWORD=12345
+        ports:
+            - 3308:3306 # local:container
+        volumes:
+            - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+            - database-volume:/var/lib/mysql
+        healthcheck:
+            test:
+                [
+                    'CMD',
+                    'sh',
+                    '-c',
+                    'MYSQL_PWD=12345 mysqladmin ping -h localhost -P 3306 -u root',
+                ]
+            interval: 2s
+            timeout: 20s
+            retries: 10
+    sgp-es2-api:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        container_name: nest-api
+        restart: always
+        ports:
+            - 3000:3000
+        depends_on:
+            db:
+                condition: service_healthy
+        env_file:
+            - .env.production
+        volumes:
+            - ./:/app
+            - /app/node_modules
+            - ./firebase.credentials.json:/app/../firebase.credentials.json
+            - ./package.json:/app/../package.json
+        links:
+            - db
+volumes:
+    database-volume:
