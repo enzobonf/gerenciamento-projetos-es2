@@ -8,12 +8,15 @@ import {
 	Delete,
 	UsePipes,
 	ValidationPipe,
+	UseGuards,
 } from '@nestjs/common';
 import { ProfissionalService } from './profissional.service';
 import { CreateProfissionalDto } from './dto/create-profissional.dto';
 import { UpdateProfissionalDto } from './dto/update-profissional.dto';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('profissional')
+@UseGuards(AuthGuard())
 @UsePipes(ValidationPipe)
 export class ProfissionalController {
 	constructor(private readonly profissionalService: ProfissionalService) {}
