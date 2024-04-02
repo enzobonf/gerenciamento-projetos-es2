@@ -612,6 +612,31 @@ async function generate_essentials() {
 			},
 		],
 	});
+
+	await prisma.cliente.createMany({
+		data: [
+			{
+				nome: 'José',
+				sobrenome: 'da Silva',
+				email: 'jose@dropbox.com',
+				num_telefone: '4599999999',
+				id_genero: 1,
+				id_raca: 2,
+				id_endereco: 2,
+				numero_endereco: 54,
+			},
+			{
+				nome: 'Lucas',
+				sobrenome: 'Moura',
+				email: 'lucasspfc@gmail',
+				num_telefone: '4599879998',
+				id_genero: 1,
+				id_raca: 2,
+				id_endereco: 2,
+				numero_endereco: 1594,
+			},
+		],
+	});
 }
 
 async function main() {
