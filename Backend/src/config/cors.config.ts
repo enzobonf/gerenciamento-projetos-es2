@@ -5,6 +5,7 @@ const originsWhitelist = [
 	'http://localhost:5200',
 	'http://localhost',
 	'http://34.234.109.79',
+	'http://es2-alexandreenzo.zapto.org',
 ];
 
 export const CorsConfig: CorsOptions = {
