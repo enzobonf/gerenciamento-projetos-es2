@@ -23,6 +23,7 @@ services:
       timeout: 20s
       retries: 10
   sgp-es2-api:
+    image: enzobonf/sgp-es2-api:latest
     build:
       context: ./Backend
       dockerfile: Dockerfile
@@ -43,6 +44,7 @@ services:
     links:
       - db
   sgp-es2-frontend:
+    image: enzobonf/sgp-es2-web:latest
     build:
       context: ./Frontend
       dockerfile: Dockerfile
