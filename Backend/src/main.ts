@@ -14,7 +14,7 @@ async function bootstrap() {
 	app.use(morgan('dev'));
 	app.use(helmet());
 
-	//app.enableCors(CorsConfig);
+	app.enableCors(CorsConfig);
 
 	const config = new DocumentBuilder()
 		.setTitle('API -Gerenciamento de Projetos')
